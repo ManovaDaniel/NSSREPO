@@ -1,0 +1,84 @@
+.carousel-container {
+    position: relative;
+    width: 70%;
+    margin: auto;
+    overflow: hidden;
+  }
+  
+  .carousel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 400px;
+  }
+  
+  .slide {
+    position: absolute;
+    width: 60%;
+    transition: transform 0.8s ease-in-out;
+    opacity: 0.5;
+    transform: translateX(100%); /* Start off-screen to the left */
+  }
+  
+  .activeSlide {
+    transform: translateX(0%);
+    opacity: 1;
+    z-index: 2;
+  }
+  
+  .prevSlide {
+    transform: translateX(100%);
+    opacity: 0.5;
+  }
+  
+  .nextSlide {
+    transform: translateX(-100%);
+    opacity: 0.5;
+  }
+  
+  .slide img {
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  .text-overlay {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 18px;
+  }
+  
+  .carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    font-size: 24px;
+    opacity: 1; /* Ensure button is visible */
+    pointer-events: auto; /* Ensure it's clickable */
+    z-index: 10; /* Ensure it's above images */
+  }
+  
+  .left {
+    left: 10px;
+  }
+  
+  .right {
+    right: 10px;
+  }
+  
+  .carousel-button:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  

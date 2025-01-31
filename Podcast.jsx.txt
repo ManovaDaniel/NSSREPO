@@ -1,0 +1,81 @@
+import React, { useState } from 'react';
+import './Podcast.css';
+
+const Podcast = () => {
+  const [activeModal, setActiveModal] = useState(null);
+  const [modalType, setModalType] = useState('');
+
+  const episodes = [
+    {
+      id: 1,
+      title: "Celebrating the Missile Man of India",
+      image: "/img/podcast/episode1.png",
+      host: "Sharumathi & Deva",
+      description: "Dr. A.P.J. Abdul Kalam...", // Full description here
+      date: "October 15, 2024",
+      duration: "4 minutes",
+      audio: "/audios/Episode1.mp3",
+      video: "/videos/Episode1.mp4"
+    }
+    // Add more episodes as needed
+  ];
+
+  const openModal = (id, type) => {
+    setActiveModal(id);
+    setModalType(type);
+  };
+
+  const closeModal = () => {
+    setActiveModal(null);
+    setModalType('');
+  };
+
+  return (
+    <div className="container">
+      <section className="intro">
+        <h2>Welcome to the NSS Podcast</h2>
+        <p>Insightful discussions on community service...</p>
+      </section>
+
+      <section className="podcast">
+        {episodes.map(episode => (
+          <div key={episode.id} className="episode">
+            <img src={episode.image} alt={`Episode ${episode.id} Thumbnail`} />
+            <div className="episode-info">
+              <h3>Episode {episode.id}: {episode.title}</h3>
+              <p><strong>Host:</strong> {episode.host}</p>
+              <p>{episode.description}</p>
+              <p><strong>Release Date:</strong> {episode.date}</p>
+              <p><strong>Duration:</strong> {episode.duration}</p>
+              <div className="buttons">
+                <button onClick={() => openModal(episode.id, 'audio')}>Play Audio</button>
+                <button onClick={() => openModal(episode.id, 'video')}>Play Video</button>
+              </div>
+            </div>
+          </div>
+        ))}
+      </section>
+
+      {activeModal && (
+        <div className="modal" onClick={closeModal}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <span className="close" onClick={closeModal}>&times;</span>
+            {modalType === 'audio' ? (
+              <audio controls autoPlay>
+                <source src={episodes.find(e => e.id === activeModal).audio} type="audio/mp3" />
+                Your browser does not support the audio element.
+              </audio>
+            ) : (
+              <video controls autoPlay>
+                <source src={episodes.find(e => e.id === activeModal).video} type="video/mp4" />
+                Your browser does not support the video tag.
+              </video>
+            )}
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Podcast;
